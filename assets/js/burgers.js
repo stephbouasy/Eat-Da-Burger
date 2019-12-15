@@ -4,10 +4,10 @@ $(function () {
         var newBite = $(this).data("newbite");
 
         var newBiteState = {
-            Bite: newBite
+            bite: newBite
         };
 
-        $.ajax("/api/cats/" + id, {
+        $.ajax("/api/burgers/" + id, {
             type: "PUT",
             data: newBiteState
         }).then(
@@ -32,6 +32,19 @@ $(function () {
         }).then(
             function () {
                 console.log("created new burger");
+                location.reload();
+            }
+        );
+    });
+
+    $(".delete-burger").on("click", function (event) {
+        var id = $(this).data("id");
+
+        $.ajax("/api/burgers/" + id, {
+            type: "DELETE"
+        }).then(
+            function () {
+                console.log("deleted burger", id);
                 location.reload();
             }
         );
